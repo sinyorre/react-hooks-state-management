@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useContext} from 'react';
 import './App.css';
+import Store from './store/store'
 
 function App() {
+  const { state, dispatch } = useContext(Store);
+  
+  const addTodo = () => {
+    dispatch({ type: "ADD_TODO", payload: "todo 1" });
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <h1>Hello World</h1>
+       <ul>
+        {state.todos.map(todo => (
+          <li>{todo}</li>
+        ))}
+       </ul>
+       <button onClick={() => addTodo()}>Add</button>
     </div>
   );
 }
